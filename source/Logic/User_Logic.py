@@ -20,7 +20,7 @@ class UserLogic:
     def add_vacation(self, vacation_title, desc, start_date, end_date, countries_name, price, img_url):
         try:
             query = """
-            INSERT INTO vacations_mysql.vacations 
+            INSERT INTO mydb.vacations 
             (vacation_title, desc, start_date, end_date, Countries_id, price, img_url)
             VALUES 
             (%s, %s, %s, %s, (SELECT id FROM mydb.Countries WHERE country_name LIKE %s), %s, %s)
@@ -33,22 +33,6 @@ class UserLogic:
 
         except Exception as err:
             print(f"Error adding vacation: {err}")
-            return False
-
-    def edit_vacation(self, id, **kwargs):
-        if not kwargs:
-            return False
-
-        clause = ", ".join([f"{k} = %s" for k in kwargs.keys()])
-
-        params = tuple(kwargs.values()) + (id,)
-        query = f"UPDATE vacations_mysql.vacations SET {clause} WHERE id = %s"
-
-        try:
-            self.dal.update(query, params)
-            return True
-        except Exception as e:
-            print(f"Error updating vacation: {e}")
             return False
 
     def del_vacation(self, id):

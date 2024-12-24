@@ -17,10 +17,10 @@ class LikeLogic:
         return result if result is not None else []
 
 
-    def add_vacation(self, vacation_title, desc, start_date, end_date, countries_name, price, img_url):
+    def add_like(self,Vacations_id, Users_id):
         try:
             query = """
-            INSERT INTO vacations_mysql.vacations 
+            INSERT INTO mydb.vacations 
             (vacation_title, desc, start_date, end_date, Countries_id, price, img_url)
             VALUES 
             (%s, %s, %s, %s, (SELECT id FROM mydb.Countries WHERE country_name LIKE %s), %s, %s)
@@ -42,7 +42,7 @@ class LikeLogic:
         clause = ", ".join([f"{k} = %s" for k in kwargs.keys()])
 
         params = tuple(kwargs.values()) + (id,)
-        query = f"UPDATE vacations_mysql.vacations SET {clause} WHERE id = %s"
+        query = f"UPDATE mydb.vacations SET {clause} WHERE id = %s"
 
         try:
             self.dal.update(query, params)
@@ -64,10 +64,10 @@ class LikeLogic:
 
 if __name__ == "__main__":
     try:
-        with VacationLogic() as vacation_logic:
-            vacations = vacation_logic.get_all_vacations()
-            for vacation in vacations:
+        with LikeLogic() as like_logic:
+            likes = like_logic.get_all_likes()
+            for like in likes:
                 print("----------------------")
-                print(vacation)
+                print(like)
     except Exception as err:
         print(f"Error: {err}")

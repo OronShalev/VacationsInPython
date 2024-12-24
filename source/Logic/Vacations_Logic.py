@@ -42,7 +42,7 @@ class VacationLogic:
         clause = ", ".join([f"{k} = %s" for k in kwargs.keys()])
 
         params = tuple(kwargs.values()) + (id,)
-        query = f"UPDATE vacations_mysql.vacations SET {clause} WHERE id = %s"
+        query = f"UPDATE mydb.vacations SET {clause} WHERE id = %s"
 
         try:
             self.dal.update(query, params)
