@@ -11,13 +11,17 @@ class LikeLogic:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.dal.close()
 
-    def get_all_likes(self):
+    def get_all_likes(self, vacation_id):
+        pass
         query = "SELECT * from mydb.likes"
         result = self.dal.get_table(query)
         return result if result is not None else []
 
+    def is_liked(self, user_id, vacation_id):
+        pass
 
     def add_like(self,Vacations_id, Users_id):
+        pass
         try:
             query = """
             INSERT INTO mydb.vacations 
@@ -29,29 +33,12 @@ class LikeLogic:
                     end_date, f"%{countries_name}%", price, img_url)
             self.dal.insert(query, params)
             return True
-
-
         except Exception as err:
             print(f"Error adding vacation: {err}")
             return False
 
-    def edit_vacation(self, id, **kwargs):
-        if not kwargs:
-            return False
-
-        clause = ", ".join([f"{k} = %s" for k in kwargs.keys()])
-
-        params = tuple(kwargs.values()) + (id,)
-        query = f"UPDATE mydb.vacations SET {clause} WHERE id = %s"
-
-        try:
-            self.dal.update(query, params)
-            return True
-        except Exception as e:
-            print(f"Error updating vacation: {e}")
-            return False
-
-    def del_vacation(self, id):
+    def remove_like(self, user_id, vacation_id):
+        pass
         query = "DELETE FROM mydb.vacations WHERE id = %s"
         params = (id,)
         try:
