@@ -17,10 +17,11 @@ class UserLogic:
         return result if result is not None else []
 
     def is_admin(self, id):
-        pass;
+        pass
 
 
     def add_user(self, first_name, last_name, email, password, date_of_birth):
+        pass
         try:
             query = """
             INSERT INTO mydb.vacations 
@@ -37,6 +38,12 @@ class UserLogic:
         except Exception as err:
             print(f"Error adding vacation: {err}")
             return False
+
+    def is_exist_user(self, email, password):
+        pass
+
+    def is_exist_email(self, email):
+        pass
 
 
 
