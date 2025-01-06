@@ -16,8 +16,11 @@ class UserLogic:
         result = self.dal.get_table(query)
         return result if result is not None else []
 
+    def is_admin(self, id):
+        pass;
 
-    def add_vacation(self, vacation_title, desc, start_date, end_date, countries_name, price, img_url):
+
+    def add_user(self, first_name, last_name, email, password, date_of_birth):
         try:
             query = """
             INSERT INTO mydb.vacations 
@@ -35,15 +38,7 @@ class UserLogic:
             print(f"Error adding vacation: {err}")
             return False
 
-    def del_vacation(self, id):
-        query = "DELETE FROM mydb.vacations WHERE id = %s"
-        params = (id,)
-        try:
-            result = self.dal.delete(query, params)
-            return True
-        except Exception as err:
-            print(f"Error deleting vacation: {err}")
-            return False
+
 
 
 if __name__ == "__main__":
