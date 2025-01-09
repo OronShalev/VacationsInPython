@@ -1,6 +1,6 @@
 from datetime import datetime, date
-from Logic.country_logic import CountryLogic
-from Logic.Vacation_Logic import Vacations_Logic
+from source.Logic.Vacations_Logic import VacationLogic
+from source.Logic.Country_Logic import CountryLogic
 
 class VacationFacade:
     def __init__(self):
