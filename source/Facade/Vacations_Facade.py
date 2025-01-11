@@ -9,6 +9,47 @@ class VacationFacade:
         self.logic = VacationLogic()
         self.country_logic = CountryLogic()
 
+    def show_vacation(self, id):
+        vac = self.logic.
+
+    def edit_vacation(self, id):
+        print("Editing vacation...")
+        updates = {}
+
+        if input("Edit title? (y/n): ").strip().lower() == 'y':
+            self.get_title()
+            updates['vacation_title'] = self.params[-1]
+
+        if input("Edit description? (y/n): ").strip().lower() == 'y':
+            self.get_description()
+            updates['desc'] = self.params[-1]
+
+        if input("Edit start date? (y/n): ").strip().lower() == 'y':
+            self.get_start_date()
+            updates['start_date'] = self.params[-1]
+
+        if input("Edit end date? (y/n): ").strip().lower() == 'y':
+            self.get_end_date()
+            updates['end_date'] = self.params[-1]
+
+        if input("Edit country? (y/n): ").strip().lower() == 'y':
+            self.get_countries_name()
+            updates['Countries_id'] = self.params[-1]
+
+        if input("Edit price? (y/n): ").strip().lower() == 'y':
+            self.get_price()
+            updates['price'] = self.params[-1]
+
+        if input("Edit image URL? (y/n): ").strip().lower() == 'y':
+            self.get_image()
+            updates['img_url'] = self.params[-1]
+
+        success = self.logic.edit_vacation(id, **updates)
+        if success:
+            print("Vacation updated successfully!")
+        else:
+            print("Failed to update vacation.")
+
     def add_vacation(self):
         self.get_title()
         self.get_description()
@@ -129,6 +170,8 @@ class VacationFacade:
 if __name__ == "__main__":
 
     vacation = VacationFacade()
+
+    vacation.edit_vacation(1)
 
     result = vacation.add_vacation()
 

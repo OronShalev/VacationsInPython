@@ -16,6 +16,9 @@ class VacationLogic:
         result = self.dal.get_table(query)
         return result if result is not None else []
 
+    def get_vacation(self, id):
+        pass
+
 
     def add_vacation(self, vacation_title, desc, start_date, end_date, countries_name, price, img_url):
         try:

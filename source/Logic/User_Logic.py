@@ -87,8 +87,8 @@ if __name__ == "__main__":
                 print("Is Admin:", is_admin)
 
                 print("Testing add_user...")
-                add_user_result = user_logic.add_user("Test", "User", "test.user@example.com", "password123", "2000-01-01")
-                print("Add User Result:", add_user_result)
+                success = user_logic.add_user("Test", "User", "unique123.email@example.com", "password123", "2000-01-01")
+                print("User added:", success)
 
                 print("Testing is_exist_user...")
                 exist_user = user_logic.is_exist_user("test.user@example.com", "password123")

@@ -44,10 +44,12 @@ class DAL:
                         return result
 
                     print(f"Query executed successfully, affected {cursor.rowcount} rows.")
-                    return None
+                    return True
             except mysql.connector.Error as err:
                 print(f"Error executing query: {err}")
-                return None
+                if fetchall or fetchone:
+                    return None
+                return False
         else:
             print("No connection to the database. Query not executed.")
             return None
@@ -59,10 +61,18 @@ class DAL:
         return self.execute_query(query, params, fetchone=True)
 
     def insert(self, query, params=None):
-        return self.execute_query(query, params)
+        try:
+            return self.execute_query(query, params)
+        except Exception as e:
+            print(f"Insert operation failed: {e}")
+            return False
 
     def update(self, query, params=None):
-        return self.execute_query(query, params)
+        try:
+            return self.execute_query(query, params)
+        except Exception as e:
+            print(f"Insert operation failed: {e}")
+            return False
 
     def delete(self, query, params=None):
         return self.execute_query(query, params)
@@ -88,3 +98,6 @@ if __name__ == "__main__":
             print(f"country name: {country['country_name']}, id: {country['id']}")
         for user in users:
             print(f"user name: {user['first_name']} {user['last_name']}, id: {user['id']}")
+
+        print(dal.insert("fdb"))
+
