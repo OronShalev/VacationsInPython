@@ -16,8 +16,8 @@ class UserFacade:
         self.get_email_exists()
         self.get_password_matched()
         
-        
     def register_user(self):
+        self.logout_user()
         self.get_first_name()
         self.get_last_name()
         self.get_email()
