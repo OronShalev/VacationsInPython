@@ -17,8 +17,8 @@ class VacationLogic:
         return result if result is not None else []
 
     def get_vacation(self, id):
-        query = "SELECT * from mydb.vacations"
-        result = self.dal.get_table(query)
+        query = "SELECT * from mydb.vacations WHERE id = %s"
+        result = self.dal.get_scalar(query,(id,))
         return result if result is not None else []
 
 
@@ -70,9 +70,10 @@ class VacationLogic:
 if __name__ == "__main__":
     try:
         with VacationLogic() as vacation_logic:
-            vacations = vacation_logic.get_all_vacations()
-            for vacation in vacations:
-                print("----------------------")
-                print(vacation)
+            # vacations = vacation_logic.get_all_vacations()
+            # for vacation in vacations:
+            #     print("----------------------")
+            #     print(vacation)
+            print(vacation_logic.get_vacation())
     except Exception as err:
         print(f"Error: {err}")

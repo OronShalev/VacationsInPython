@@ -9,8 +9,30 @@ class VacationFacade:
         self.logic = VacationLogic()
         self.country_logic = CountryLogic()
 
+
     def show_vacation(self, id):
-        vac = self.logic.get_vacation()
+        vac = self.logic.get_vacation(id)
+        print("Vacation details")
+
+         `vacation_title`,
+         `start_date`,
+         `end_date`,
+         `price`,
+         `Countries_id`,
+         `img_url`,
+         `desc`
+
+
+        print(f"Title: {vac['vacation_title']}")
+        print(f"Title: {vac['desc']}")
+        print(f"Title: {vac['price']}")
+        print(f"Title: {CountryLogic.get_all_countries()[vac['Countries_id']]}")
+        print(f"Title: {vac['start_date']}")
+        print(f"Title: {vac['vacation_title']}")
+        print(f"Title: {vac['end_date']}")
+        print(f"Likes: {vac['vacation_title']}")
+
+
 
     def edit_vacation(self, id):
         print("Editing vacation...")
