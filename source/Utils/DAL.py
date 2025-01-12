@@ -61,18 +61,10 @@ class DAL:
         return self.execute_query(query, params, fetchone=True)
 
     def insert(self, query, params=None):
-        try:
-            return self.execute_query(query, params)
-        except Exception as e:
-            print(f"Insert operation failed: {e}")
-            return False
+        return self.execute_query(query, params)
 
     def update(self, query, params=None):
-        try:
-            return self.execute_query(query, params)
-        except Exception as e:
-            print(f"Insert operation failed: {e}")
-            return False
+        return self.execute_query(query, params)
 
     def delete(self, query, params=None):
         return self.execute_query(query, params)

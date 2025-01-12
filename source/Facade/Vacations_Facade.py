@@ -10,7 +10,7 @@ class VacationFacade:
         self.country_logic = CountryLogic()
 
     def show_vacation(self, id):
-        vac = self.logic.
+        vac = self.logic.get_vacation()
 
     def edit_vacation(self, id):
         print("Editing vacation...")
