@@ -10,9 +10,16 @@ class LikeLogic:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.dal.close()
 
-    def get_all_likes(self, vacation_id):
-        query = "SELECT * from mydb.likes"
-        result = self.dal.get_table(query)
+    def get_all_likes_by_vacation(self, vacation_id):
+        query = "SELECT * from mydb.likes WHERE vacation_id = %s"
+        params = (vacation_id)
+        result = self.dal.get_table(query, params)
+        return result if result is not None else []
+    
+    def get_all_likes_by_user(self, user_id):
+        query = "SELECT * from mydb.likes WHERE user_id = %s"
+        params = (user_id)
+        result = self.dal.get_table(query, params)
         return result if result is not None else []
 
     def is_liked(self, user_id, vacation_id):
@@ -59,6 +66,17 @@ class LikeLogic:
         
         except Exception as err:
             print(f"Error removing like: {err}")
+            return False
+        
+    def delete_all_likes_from_vacation(self, Vacations_id):
+        try:
+            query = "DELETE FROM mydb.likes WHERE vacation_id = %s"
+            params = (Vacations_id)
+            result = self.dal.delete(query, params)
+            return True
+        
+        except Exception as err:
+            print(f"Error deleting vacation: {err}")
             return False
 
 

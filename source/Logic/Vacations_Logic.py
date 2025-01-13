@@ -1,5 +1,5 @@
 from source.Utils.DAL import DAL
-
+from source.Logic.Like_Logic import LikeLogic
 
 class VacationLogic:
     def __init__(self):
@@ -56,16 +56,17 @@ class VacationLogic:
             print(f"Error updating vacation: {e}")
             return False
 
-    def del_vacation(self, id):
-        query = "DELETE FROM mydb.vacations WHERE id = %s"
+    def del_vacation(self, id):    
         params = (id,)
         try:
+            with LikeLogic() as like_logic:
+                like_logic.delete_all_likes_from_vacation(id)
+            query = "DELETE FROM mydb.vacations WHERE id = %s"
             result = self.dal.delete(query, params)
             return True
         except Exception as err:
             print(f"Error deleting vacation: {err}")
             return False
-
 
 if __name__ == "__main__":
     try:
