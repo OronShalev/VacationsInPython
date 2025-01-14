@@ -79,9 +79,24 @@ class Main:
         self.admin_vac_show()
 
     def admin_vac_show(self):
-        self.v_facade.show_vacation(self.v_id);
-        while
-
+        self.v_facade.show_vacation(self.v_id)
+        print("Vacation actions")
+        print("1 - Edit vacation")
+        print("2 - Delete vacation")
+        print("3 - Back")
+        while True:
+            select = input("Enter your selection here: ")
+            if select == "1":
+                self.v_facade.edit_vacation(self.v_id)
+                self.admin_vac_show()
+                break
+            elif select == "2":
+                self.v_logic.del_vacation(self.v_id)
+                break
+            elif select == "3":
+                return
+            else:
+                print("Invalid input! Please try again.")
 
 
 
