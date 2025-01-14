@@ -25,8 +25,8 @@ class VacationLogic:
     def add_vacation(self, vacation_title, desc, start_date, end_date, countries_name, price, img_url):
         try:
             query = """
-            INSERT INTO vacations_mysql.vacations 
-            (vacation_title, desc, start_date, end_date, Countries_id, price, img_url)
+            INSERT INTO mydb.vacations 
+            (vacation_title, description, start_date, end_date, Countries_id, price, img_url)
             VALUES 
             (%s, %s, %s, %s, (SELECT id FROM mydb.Countries WHERE country_name LIKE %s), %s, %s)
             """

@@ -28,6 +28,16 @@ class UserLogic:
             print(f"Error checking user: {err}")
             return False
 
+    def get_user(self, user_id):
+        try:
+            query = "SELECT * from mydb.users where id = %s"
+            params = (user_id,)
+            return self.dal.get_scalar(query, params)
+
+        except Exception as err:
+            print(f"Error checking user: {err}")
+            return False
+
     def add_user(self, first_name, last_name, email, password, date_of_birth):
         try:
             if not self.is_exist_email(email):
@@ -35,7 +45,7 @@ class UserLogic:
                 INSERT INTO mydb.users 
                 (first_name, last_name, email, password, date_of_birth, Roles_id)
                 VALUES 
-                (%s, %s, %s, %s, %s, 1)
+                (%s, %s, %s, %s, %s, 2)
                 """
                 params = (first_name, last_name, email, password, date_of_birth)
                 return self.dal.insert(query, params)
@@ -54,6 +64,16 @@ class UserLogic:
             if len(result) != 0:
                 return True
             return False
+
+        except Exception as err:
+            print(f"Error checking user: {err}")
+            return False
+
+    def get_user_from_email_password(self, email, password):
+        try:
+            query = "SELECT * from mydb.users where email = %s AND password = %s"
+            params = (email, password)
+            return self.dal.get_scalar(query, params)
 
         except Exception as err:
             print(f"Error checking user: {err}")

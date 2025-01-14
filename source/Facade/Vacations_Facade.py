@@ -1,6 +1,8 @@
 from datetime import datetime, date
 from source.Logic.Vacations_Logic import VacationLogic
 from source.Logic.Country_Logic import CountryLogic
+from source.Logic.Like_Logic import LikeLogic
+import re
 
 class VacationFacade:
     def __init__(self):
@@ -8,30 +10,19 @@ class VacationFacade:
         self.now = date.today()
         self.logic = VacationLogic()
         self.country_logic = CountryLogic()
+        self.like_logic = LikeLogic()
 
 
     def show_vacation(self, id):
         vac = self.logic.get_vacation(id)
         print("Vacation details")
-
-         `vacation_title`,
-         `start_date`,
-         `end_date`,
-         `price`,
-         `Countries_id`,
-         `img_url`,
-         `desc`
-
-
         print(f"Title: {vac['vacation_title']}")
-        print(f"Title: {vac['desc']}")
-        print(f"Title: {vac['price']}")
-        print(f"Title: {CountryLogic.get_all_countries()[vac['Countries_id']]}")
-        print(f"Title: {vac['start_date']}")
-        print(f"Title: {vac['vacation_title']}")
+        print(f"Description: {vac['desc']}")
+        print(f"Price: {vac['price']}")
+        print(f"Country: {CountryLogic.get_all_countries()[vac['Countries_id']]}")
+        print(f"Start date: {vac['start_date']}")
         print(f"Title: {vac['end_date']}")
-        print(f"Likes: {vac['vacation_title']}")
-
+        print(f"Likes: {self.like_logic.get_all_likes_by_vacation(id)}")
 
 
     def edit_vacation(self, id):
@@ -44,7 +35,7 @@ class VacationFacade:
 
         if input("Edit description? (y/n): ").strip().lower() == 'y':
             self.get_description()
-            updates['desc'] = self.params[-1]
+            updates['description'] = self.params[-1]
 
         if input("Edit start date? (y/n): ").strip().lower() == 'y':
             self.get_start_date()
@@ -73,6 +64,7 @@ class VacationFacade:
             print("Failed to update vacation.")
 
     def add_vacation(self):
+        print("Adding vacation...")
         self.get_title()
         self.get_description()
         self.get_start_date()
@@ -97,7 +89,7 @@ class VacationFacade:
 
     def get_countries_name(self):
         while True:
-            countries_name = input("Enter country name: ").lower()
+            countries_name = input("Enter country name: ")
             if self.country_logic.check_if_country_exist(countries_name):
                 print("Country added to vacation info!")
                 self.params.append(countries_name)
