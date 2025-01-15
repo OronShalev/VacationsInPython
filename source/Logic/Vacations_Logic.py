@@ -4,6 +4,7 @@ from source.Logic.Like_Logic import LikeLogic
 class VacationLogic:
     def __init__(self):
         self.dal = DAL()
+        self.like_logic = LikeLogic()
 
     def __enter__(self):
         return self
@@ -15,6 +16,17 @@ class VacationLogic:
         query = "SELECT * from mydb.vacations"
         result = self.dal.get_table(query)
         return result if result is not None else []
+
+    def get_all_vacations_liked_by_uid(self, user_id):
+        query = """
+        SELECT vacations.*
+        FROM vacations
+        JOIN likes ON vacations.id = likes.Vacations_id
+        WHERE likes.Users_id = %s
+        """
+        params = (user_id,)
+        return self.dal.get_table(query, params) or []
+
 
     def get_vacation(self, id):
         query = "SELECT * from mydb.vacations WHERE id = %s"
@@ -71,10 +83,10 @@ class VacationLogic:
 if __name__ == "__main__":
     try:
         with VacationLogic() as vacation_logic:
-            # vacations = vacation_logic.get_all_vacations()
-            # for vacation in vacations:
-            #     print("----------------------")
-            #     print(vacation)
-            print(vacation_logic.get_vacation())
+            vacations = vacation_logic.get_all_vacations()
+            for vacation in vacations:
+                 print("----------------------")
+                 print(vacation)
+            # print(vacation_logic.get_vacation())
     except Exception as err:
         print(f"Error: {err}")

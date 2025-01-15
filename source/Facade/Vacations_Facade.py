@@ -17,12 +17,12 @@ class VacationFacade:
         vac = self.logic.get_vacation(id)
         print("Vacation details")
         print(f"Title: {vac['vacation_title']}")
-        print(f"Description: {vac['desc']}")
+        print(f"Description: {vac['description']}")
         print(f"Price: {vac['price']}")
-        print(f"Country: {CountryLogic.get_all_countries()[vac['Countries_id']]}")
+        print(f"Country: {self.country_logic.get_all_countries()[vac['Countries_id']]['country_name']}")
         print(f"Start date: {vac['start_date']}")
-        print(f"Title: {vac['end_date']}")
-        print(f"Likes: {self.like_logic.get_all_likes_by_vacation(id)}")
+        print(f"End date: {vac['end_date']}")
+        print(f"Likes: {len(self.like_logic.get_all_likes_by_vacation(id))}")
 
 
     def edit_vacation(self, id):

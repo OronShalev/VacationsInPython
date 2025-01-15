@@ -11,7 +11,7 @@ class DAL:
                 database="mydb"
             )
             self.connection.autocommit = True  # Set autocommit explicitly
-            print("Database connection established.")
+            # print("Database connection established.")
         except mysql.connector.Error as err:
             print(f"Error connecting to database: {err}")
             self.connection = None
@@ -29,29 +29,30 @@ class DAL:
         if self.connection:
             try:
                 with self.connection.cursor(dictionary=True) as cursor:  # Fixed typo: curser -> cursor
-                    print(f"Executing query: {query}")
+                    # print(f"Executing query: {query}")
                     if params:
-                        print(f"With parameters: {params}")
+                        pass
+                        # print(f"With parameters: {params}")
                     cursor.execute(query, params)
 
                     if fetchall:
                         result = cursor.fetchall()
-                        print(f"Fetched {len(result)} rows.")
+                        # print(f"Fetched {len(result)} rows.")
                         return result
                     if fetchone:
                         result = cursor.fetchone()
-                        print("Fetched one row.")
+                        # print("Fetched one row.")
                         return result
 
-                    print(f"Query executed successfully, affected {cursor.rowcount} rows.")
+                    # print(f"Query executed successfully, affected {cursor.rowcount} rows.")
                     return True
             except mysql.connector.Error as err:
-                print(f"Error executing query: {err}")
+                # print(f"Error executing query: {err}")
                 if fetchall or fetchone:
                     return None
                 return False
         else:
-            print("No connection to the database. Query not executed.")
+            # print("No connection to the database. Query not executed.")
             return None
 
     def get_table(self, query, params=None):

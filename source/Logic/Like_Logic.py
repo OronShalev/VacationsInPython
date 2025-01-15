@@ -24,12 +24,10 @@ class LikeLogic:
 
     def is_liked(self, user_id, vacation_id):
         try:
-            query = "SELECT * from mydb.users where Users_id = %s AND Vacations_id = %s"
+            query = "SELECT * from mydb.likes where Users_id = %s AND Vacations_id = %s"
             params = (user_id, vacation_id)
             result = self.dal.get_table(query, params)
-            if len(result) == 1:
-                return True
-            return False
+            return bool(result)
 
         except Exception as err:
             print(f"Error checking user: {err}")
@@ -37,7 +35,7 @@ class LikeLogic:
 
     def add_like(self, Vacations_id, Users_id):
         try:
-            if not self.is_liked(Vacations_id, Users_id):
+            if not self.is_liked(Users_id, Vacations_id):
                 query = """
                 INSERT INTO mydb.likes
                 (Vacations_id, Users_id)
@@ -56,7 +54,7 @@ class LikeLogic:
 
     def remove_like(self, Vacations_id, Users_id):
         try:
-            if self.is_liked(Vacations_id, Users_id):
+            if self.is_liked(Users_id, Vacations_id):
                 query = "DELETE FROM mydb.likes WHERE Vacations_id = %s AND Users_id = %s"
                 params = (Vacations_id, Users_id)
                 result = self.dal.delete(query, params)
@@ -71,7 +69,7 @@ class LikeLogic:
     def delete_all_likes_from_vacation(self, Vacations_id):
         try:
             query = "DELETE FROM mydb.likes WHERE Vacations_id = %s"
-            params = (Vacations_id)
+            params = (Vacations_id,)
             result = self.dal.delete(query, params)
             return True
         

@@ -12,13 +12,13 @@ class UserFacade:
         self.params = []
 
     def login_user(self):
-        print("\n\nLogin\n")
+        print("Login")
         self.logout_user()
         self.get_email_exists()
         self.get_password_matched()
         
     def register_user(self):
-        print("\n\nRegister\n")
+        print("Register")
         self.logout_user()
         self.get_first_name()
         self.get_last_name()

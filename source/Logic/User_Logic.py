@@ -20,9 +20,7 @@ class UserLogic:
             query = "SELECT * from mydb.users where id = %s"
             params = (user_id,)
             result = self.dal.get_table(query, params)
-            if result[0]['Roles_id'] == 1: #לבדוק האם התפקיד של אותו משתמש הוא 2
-                return True
-            return False
+            return result[0]['Roles_id'] == 1
 
         except Exception as err:
             print(f"Error checking user: {err}")
