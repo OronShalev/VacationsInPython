@@ -9,3 +9,10 @@ When you will login as a user, you will be able to view all the vacation are the
 When you login as an admin, you will not be able to like and unlike vacations, but you will be able to add vacations, edit existing vacations and deleting vacations.
 All these actions will be shown to you by a menu and list of numbers and operarion, choosing an operarion is by picking their number.
 
+# Setup instructions
+
+
+# Team member contributions
+While working on the project, each member on our team took some part of the project:
+Oron - All logic (Logic Country, Logic Vacation, Logic User, Logic Likes), All Facade (Facade Vacation, Facade User, Facade Likes), Main
+Osher - Logic Vacation, Logic User, Logic Likes, Main
