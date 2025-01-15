@@ -1,13 +1,19 @@
+import dotenv
 import mysql.connector
-
+import os
+from dotenv import load_dotenv
 
 class DAL:
     def __init__(self):
         try:
+            dotenv.load_dotenv()
+            database_url = os.getenv('DATABASE_URL')
+            secret_key = os.getenv('SECRET_KEY')
+
             self.connection = mysql.connector.connect(  # Fixed self.connector.connect to mysql.connector.connect
                 host="localhost",
                 user="root",
-                password="OSh329227961",
+                password= secret_key,
                 database="mydb"
             )
             self.connection.autocommit = True  # Set autocommit explicitly
